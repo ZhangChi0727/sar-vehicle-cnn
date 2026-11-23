@@ -1,14 +1,14 @@
 # CNN-Based SAR Vehicle Target Recognition
 
-A modular PyTorch implementation for 3-class Synthetic Aperture Radar (SAR) vehicle target recognition (`BMP2`, `BTR70`, `T72`) on the MSTAR dataset, refactored from our undergraduate *Introduction to Deep Learning* course project at Northwestern Polytechnical University.
+A modular, documented PyTorch implementation for 3-class Synthetic Aperture Radar (SAR) vehicle target recognition (`BMP2`, `BTR70`, `T72`) on the MSTAR dataset, refactored from our undergraduate *Introduction to Deep Learning* course project at Northwestern Polytechnical University.
 
 ## Highlights
-- **Network Architecture (`ConvN`)**: Two 2D convolutional blocks (`Conv2d + BatchNorm2d + ReLU`), spatial max-pooling, and a 3-layer fully connected classifier with `BatchNorm1d` and `log_softmax` output.
+- **Network Architecture (`ConvN`)**: Two 2D convolutional blocks (`Conv2d + BatchNorm2d + ReLU`), spatial max-pooling, and four fully connected layers (`512 -> 128 -> 64 -> 32 -> 3`) with `BatchNorm1d` and `log_softmax` output.
 - **Reproducible Split**: Fixed-seed 70% / 30% train-validation split (`SARTrainDataset`) with random crop augmentation (`32x32`).
-- **Validation Performance**: Converged to **~96% validation accuracy** on the 70/30 split.
-- **Automated Verification**: Includes unit tests (`tests/test_model.py`) verifying tensor shapes, log-probability normalization, and dataset loading.
+- **Historical Coursework Benchmark**: The original 2022 coursework report recorded approximately **96% validation accuracy** on the 70/30 split (with held-out test labels evaluated by the course instructors); this refactored repository preserves the modular architecture and includes unit tests (`tests/test_model.py`).
 
 ## Repository Structure
+
 ```
 sar-vehicle-cnn/
 ├── src/
@@ -48,3 +48,4 @@ python -m src.train --train-txt data/train.txt --epochs 100 --batch-size 100
 # 4. Run inference on unlabeled test set
 python -m src.infer --test-txt data/test.txt --weights checkpoints/best_model.pth --out result.txt
 ```
+
